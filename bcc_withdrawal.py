@@ -72,13 +72,16 @@ if __name__ == '__main__':
     print("Collected %s inputs for %s BCC \n" % (len(tx_ins), tx_amount/100000000))
 
 
-    ptpkh = OPCODE["OP_DUP"] + OPCODE["OP_HASH160"] + b'\x14%s' + OPCODE["OP_EQUALVERIFY"] + OPCODE["OP_CHECKSIG"]
-    p2sh = OPCODE["OP_HASH160"] + b'\x14%s' + OPCODE["OP_EQUAL"]
+    # ptpkh = OPCODE["OP_DUP"] + OPCODE["OP_HASH160"] + b'\x14%s' + OPCODE["OP_EQUALVERIFY"] + OPCODE["OP_CHECKSIG"]
+    # p2sh = OPCODE["OP_HASH160"] + b'\x14%s' + OPCODE["OP_EQUAL"]
 
     if address[0] == '1':
-        tx_out = [Output(tx_amount, ptpkh % raw_address), ]
+        tx_out = [Output(tx_amount,
+                  OPCODE["OP_DUP"] + OPCODE["OP_HASH160"] + b'\x14' +\
+                  raw_address +  OPCODE["OP_EQUALVERIFY"] + OPCODE["OP_CHECKSIG"] ), ]
     else:
-        tx_out = [Output(tx_amount, p2sh % raw_address), ]
+        tx_out = [Output(tx_amount,
+                  OPCODE["OP_HASH160"] + b'\x14' + raw_address  + OPCODE["OP_EQUAL"]), ]
 
     tx = Transaction(1, tx_ins, tx_out, 0)
 
