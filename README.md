@@ -20,7 +20,7 @@ python3 decode_transaction.py --hex 0100000001a99a83022b1412b9bf9ff4e8a2d2177bab
 
 ```
 
-# Boradcast transaction 
+# Broadcast transaction 
 
 
 http://blockdozer.com/insight/tx/send
