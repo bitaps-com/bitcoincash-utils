@@ -12,8 +12,9 @@ def fmt(g,n):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Bitcoin cash utils v 1.0")
-    parser.add_argument("-p","--private_key", help="private key", type=str, metavar=('ID'))
-    parser.add_argument("-o","--pay_out", help="payout address", type=str, metavar=('ID'))
+    parser.add_argument("-p","--private_key", help="private key", type=str, )
+    parser.add_argument("-o","--pay_out", help="payout address", type=str, )
+    parser.add_argument("-r","--rate", help="satoshi/byte rate", type=int, default=5 )
 
     args = parser.parse_args()
     if not args.private_key:
@@ -35,7 +36,7 @@ if __name__ == '__main__':
     address = bitcoin.pubtoaddr(pub)
     raw_pub = unhexlify(pub)
     pay_out = args.pay_out
-    fee_rate = 5
+    fee_rate = args.rate
     if not is_address_valid(pay_out):
         print("\nError:  Payout address invalid!!! %s\n" % pay_out)
         sys.exit(0)
@@ -125,8 +126,9 @@ if __name__ == '__main__':
             raw_pub)
     raw_tx = tx.serialize()
     print("Payout transaction: %s" % rh2s(double_sha256(raw_tx)) )
-    print("amount %s BCC miner fee %s BCC [%s satoshi/byte]:\n" % (fmt(tx_amount -  fee, 8),
+    print("amount %s BCC miner fee %s BCC [%s satoshi/byte]:" % (fmt(tx_amount -  fee, 8),
                                                                              fmt(fee, 8),
                                                                              int(fee/len(raw_tx))))
+    print("payout to %s\n" % pay_out)
     print(hexlify(raw_tx).decode())
 
