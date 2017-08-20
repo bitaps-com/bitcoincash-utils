@@ -2,6 +2,12 @@
 Bitcoin cash utils
 
 
+# Install Requirements
+```
+pip3 install requests 
+
+pip3 install bitcoin
+```
 
 # Examle
 
