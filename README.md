@@ -9,7 +9,7 @@ pip3 install requests
 pip3 install bitcoin
 ```
 
-# Examle
+# Example
 
 ```
 python3 bcc_withdrawal.py -p 5H*****************34Q -o 1F8t9FwxNPwePdviA8hTZKrzAx11rhM6Pz
